@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WebScraper {
-    // URL of the Wikipedia page for the NBA
     private String url = "https://en.wikipedia.org/wiki/National_Basketball_Association";
     public static void main(String[] args) {
         List<ScraperDTO> list = new WebScraper().teamScraper();
@@ -20,13 +19,10 @@ public class WebScraper {
     public List<ScraperDTO> teamScraper() {
         List<ScraperDTO> scraperList = new ArrayList<>();
         try {
-            // Fetch the page content using JSoup
             Document doc = Jsoup.connect(url).get();
 
-            // Find the table containing the team information
             Element table = doc.select("table.wikitable").first();
 
-            // Select all rows in the table except the header row
             Elements rows = table.select("tr:gt(0)");
             rows.forEach(r ->{
                 Elements columns = r.select("td");
