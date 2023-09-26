@@ -26,8 +26,8 @@ public class TeamAPIReader {
         try {
             response = client.newCall(request).execute();
             String res = response.body().string();
-            NflDTO nflDTO = gson.fromJson(res, NflDTO.class);
-            NflDTO team1 = nflDTO.generateDTO("kings");
+            TeamDTO nflDTO = gson.fromJson(res, TeamDTO.class);
+            TeamDTO team1 = nflDTO.generateDTO("kings");
             System.out.println(team1.full_name + " " + team1.id);
         }catch (IOException e) {
             throw new RuntimeException(e);
@@ -38,7 +38,7 @@ public class TeamAPIReader {
 
     @NoArgsConstructor
     @ToString
-    private static class NflDTO {
+    private static class TeamDTO {
         private String id;
         private String city;
         private String abbreviation;
@@ -46,10 +46,10 @@ public class TeamAPIReader {
         private String full_name;
         private String name;
 
-        List<NflDTO> data;
+        List<TeamDTO> data;
 
-        public NflDTO generateDTO(String name){
-            for (NflDTO s : data) {
+        public TeamDTO generateDTO(String name){
+            for (TeamDTO s : data) {
                 if(s.full_name.toLowerCase().contains(name)) {
                     return s;
                 }
