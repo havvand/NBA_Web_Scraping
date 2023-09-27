@@ -36,7 +36,6 @@ public class PlayerAPIReader {
         try {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
-            System.out.println("dsaldhaldnsakldas "+res);
             PlayerDTO nflDTO = gson.fromJson(res, PlayerDTO.class);
             nflDTO.generateDTO();
         }catch (IOException e) {
