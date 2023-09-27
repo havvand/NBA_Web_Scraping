@@ -25,4 +25,29 @@ public class PlayerDAOImpl implements PlayerDAO{
         }
         return player.getId();
     }
+
+    @Override
+    public int readPlayer(NBA_Player player){
+        try (EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            em.find(NBA_Player.class,player.getId());
+            em.getTransaction().commit();
+
+        }
+        return player.getId();
+    }
+
+    @Override
+    public void deletePlayer(int id){
+        NBA_Player deletedPlayer;
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            deletedPlayer = em.find(NBA_Player.class, id);
+            em.remove(deletedPlayer);
+            em.getTransaction().commit();
+
+        }
+    }
+
+
 }
