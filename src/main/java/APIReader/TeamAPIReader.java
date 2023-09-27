@@ -8,11 +8,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TeamAPIReader {
     static Gson gson =  new GsonBuilder().setPrettyPrinting().create();
 
-    public void callToAPI() {
+    public List<TeamDTO> callToAPI() {
+        List<TeamDTO> teamList = new ArrayList<>();
         String url = "https://www.balldontlie.io/api/v1/teams";
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder()
@@ -25,11 +28,11 @@ public class TeamAPIReader {
             response = client.newCall(request).execute();
             String res = response.body().string();
             TeamDTO teamDTO = gson.fromJson(res, TeamDTO.class);
-            TeamDTO team1 = teamDTO.generateDTO("kings");
-            System.out.println(team1.getFull_name() + " " + team1.getId());
+            teamList = teamDTO.generateDTO();
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return teamList;
 
     }
 

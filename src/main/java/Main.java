@@ -1,7 +1,9 @@
 import APIReader.PlayerAPIReader;
+import APIReader.TeamAPIReader;
 import dao.*;
 import dto.PlayerDTO;
 import dto.ScraperDTO;
+import dto.TeamDTO;
 import model.*;
 import webscraper.WebScraper;
 
@@ -22,12 +24,15 @@ public class Main {
 //            NBA_Location location = new NBA_Location(s.getLocation());
 //            locationDAO.createLocation(location);
 //        });
-        PlayerAPIReader apiReader = new PlayerAPIReader();
-        List<PlayerDTO> list = apiReader.callToAPI();
-        list.forEach(System.out::println);
+//        PlayerAPIReader apiReader = new PlayerAPIReader();
+//        List<PlayerDTO> list = apiReader.callToAPI();
+//        list.forEach(System.out::println);
+        TeamAPIReader teamAPIReader = new TeamAPIReader();
+        List<TeamDTO> teamList = teamAPIReader.callToAPI();
+        teamList.forEach(System.out::println);
+
 
 
     }
-
 
 }

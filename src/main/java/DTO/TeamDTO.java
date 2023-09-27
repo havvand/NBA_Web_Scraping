@@ -1,10 +1,11 @@
-package DTO;
+package dto;
 
 import APIReader.TeamAPIReader;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -20,12 +21,11 @@ public class TeamDTO {
 
     List<TeamDTO> data;
 
-    public TeamDTO generateDTO(String name){
+    public List<TeamDTO> generateDTO(){
+        List<TeamDTO> foundTeams = new ArrayList<>();
         for (TeamDTO s : data) {
-            if(s.full_name.toLowerCase().contains(name)) {
-                return s;
-            }
+            foundTeams.add(s);
         }
-        return null;
+        return foundTeams;
     }
 }
