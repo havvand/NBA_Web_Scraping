@@ -27,4 +27,43 @@ public class ArenaDAOImpl implements ArenaDAO{
         }
         return arena.getId();
     }
+
+    @Override
+    public int readArena(NBA_Arena arena){
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            em.find(NBA_Arena.class, arena.getId());
+            em.getTransaction().commit();
+
+
+        }
+        return arena.getId();
+    }
+
+    @Override
+    public NBA_Arena updateArena(NBA_Arena arena){
+        NBA_Arena updatedArena;
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+           updatedArena = em.merge(arena);
+            em.getTransaction().commit();
+
+        }
+        return updatedArena;
+    }
+
+    @Override
+    public void deleteArena(int id){
+        NBA_Arena deletedArena;
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            deletedArena = em.find(NBA_Arena.class, id);
+            if(deletedArena != null){
+                em.remove(deletedArena);
+            }
+        em.getTransaction().commit();}
+
+    }
+
+
 }

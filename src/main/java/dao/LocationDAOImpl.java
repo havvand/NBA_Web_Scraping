@@ -25,4 +25,39 @@ public class LocationDAOImpl implements LocationDAO{
         }
         return location.getId();
     }
+
+    @Override
+
+    public int readLocation(NBA_Location location) {
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            em.find(NBA_Location.class , location.getId());
+            em.getTransaction().commit();
+
+        }
+        return location.getId();
+    }
+
+    @Override
+    public NBA_Location updateLocation(NBA_Location location){
+        NBA_Location updatedLocation;
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            updatedLocation = em.merge(location);
+            em.getTransaction().commit();
+        }
+        return updatedLocation;
+    }
+
+    @Override
+    public void deleteLocation(int id){
+        NBA_Location deletedLocation;
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            deletedLocation = em.find(NBA_Location.class, id);
+            em.remove(deletedLocation);
+            em.getTransaction().commit();
+        }
+    }
+
 }

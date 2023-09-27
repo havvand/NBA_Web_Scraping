@@ -28,4 +28,45 @@ public class DivisionDAOImpl implements DivisionDAO{
         }
         return division.getId();
     }
+
+    @Override
+    public int readDivision(NBA_Division division){
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            em.find(NBA_Division.class, division.getId());
+            em.getTransaction().commit();
+
+        }
+        return division.getId();
+    }
+
+    @Override
+    public NBA_Division updateDivision(NBA_Division division){
+        NBA_Division updatedDivision;
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            updatedDivision = em.merge(division);
+            em.getTransaction().commit();
+
+
+        }
+        return updatedDivision;
+    }
+
+    @Override
+
+    public void deleteDivision(int id){
+        NBA_Division deletedDivision;
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            deletedDivision = em.find(NBA_Division.class, id);
+            if(deletedDivision != null){
+                em.remove(deletedDivision);
+                em.getTransaction().commit();
+            }
+        }
+    }
+
+
+
 }
