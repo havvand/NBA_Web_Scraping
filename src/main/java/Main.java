@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         TeamDAO teamDAO = TeamDAOImpl.getInstance();
 //        PlayerDAO playerDAO = PlayerDAOImpl.getInstance();
-//        DivisionDAO divisionDAO = DivisionDAOImpl.getInstance();
+        DivisionDAO divisionDAO = DivisionDAOImpl.getInstance();
         ArenaDAO arenaDAO = ArenaDAOImpl.getInstance();
         LocationDAO locationDAO = LocationDAOImpl.getInstance();
         WebScraper webScraper = new WebScraper();
@@ -29,14 +29,22 @@ public class Main {
 //        list.forEach(System.out::println);
         TeamAPIReader teamAPIReader = new TeamAPIReader();
         List<TeamDTO> teamList = teamAPIReader.callToAPI();
-        teamList
-                .forEach(t -> {
+        teamList.forEach(t -> {
                     int id = Integer.parseInt(t.getId());
                     NBA_Team team = new NBA_Team(t.getFull_name(), t.getAbbreviation());
                     team.setId(id);
                     teamDAO.createTeam(team);
-
+                    NBA_Division division = new NBA_Division(t.getDivision());
+                    if(t.getConference().matches("East")) {
+                        division.setConference(NBA_Conference.EASTERN);
+                    } else {
+                        division.setConference(NBA_Conference.WESTERN);
+                    }
+                    divisionDAO.createDivision(division);
         });
+
+
+
 
 
 

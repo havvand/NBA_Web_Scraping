@@ -24,9 +24,9 @@ public class NBA_Division {
     @OneToMany (mappedBy = "division")
     private Set<NBA_Team> teams = new HashSet<>();
 
-    public NBA_Division(String divisionName, NBA_Conference conference) {
+    public NBA_Division(String divisionName) {
         this.divisionName = divisionName;
-        this.conference = conference;
+
     }
 
     public void addTeam(NBA_Team team) {

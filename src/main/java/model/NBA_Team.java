@@ -21,8 +21,8 @@ public class NBA_Team {
     private String abbreviation;
     @ManyToOne
     private NBA_Division division;
-    @ManyToOne
-    private NBA_Arena arena;
+    @OneToMany (mappedBy = "team")
+    private Set<NBA_Arena> arenas = new HashSet<>();
     @ManyToOne
     private NBA_Location location;
 
@@ -39,6 +39,13 @@ public class NBA_Team {
         this.players.add(player);
         if (player != null) {
             player.setTeam(this);
+        }
+    }
+
+    public void addArena(NBA_Arena arena) {
+        this.arenas.add(arena);
+        if (arena != null) {
+            arena.setTeam(this);
         }
     }
 
