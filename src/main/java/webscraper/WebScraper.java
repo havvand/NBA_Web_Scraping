@@ -1,6 +1,6 @@
 package webscraper;
 
-import lombok.*;
+import dto.ScraperDTO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -65,18 +65,6 @@ public class WebScraper {
         return scraperList;
     }
 
-    @AllArgsConstructor
-    @ToString
-    @Getter
-    @Setter
-    @Builder
-    public static class ScraperDTO {
-        private String teamName;
-        private String location;
-        private String arena;
-        private int capacity;
-
-    }
 
 }
 

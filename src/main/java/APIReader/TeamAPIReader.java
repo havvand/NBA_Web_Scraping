@@ -1,6 +1,6 @@
 package APIReader;
 
-import DTO.TeamDTO;
+import dto.TeamDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import okhttp3.OkHttpClient;
@@ -24,8 +24,8 @@ public class TeamAPIReader {
         try {
             response = client.newCall(request).execute();
             String res = response.body().string();
-            TeamDTO nflDTO = gson.fromJson(res, TeamDTO.class);
-            TeamDTO team1 = nflDTO.generateDTO("kings");
+            TeamDTO teamDTO = gson.fromJson(res, TeamDTO.class);
+            TeamDTO team1 = teamDTO.generateDTO("kings");
             System.out.println(team1.getFull_name() + " " + team1.getId());
         }catch (IOException e) {
             throw new RuntimeException(e);
