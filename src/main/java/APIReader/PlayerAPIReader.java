@@ -1,6 +1,6 @@
 package APIReader;
 
-import DTO.PlayerDTO;
+import dto.PlayerDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,8 @@ import java.util.List;
 public class PlayerAPIReader {
 
     static Gson gson =  new GsonBuilder().setPrettyPrinting().create();
-    public void callToAPI() {
+    public List<PlayerDTO> callToAPI() {
+        List<PlayerDTO> playerList = new ArrayList<>();
         String url = "";
         for(int i = 1; i <= 50 ; i++) {
             url = "https://www.balldontlie.io/api/v1/players?page=" + i;
@@ -31,13 +32,15 @@ public class PlayerAPIReader {
         try {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
-            PlayerDTO nflDTO = gson.fromJson(res, PlayerDTO.class);
-            nflDTO.generateDTO();
+            PlayerDTO playerDTO = gson.fromJson(res, PlayerDTO.class);
+            playerList = playerDTO.generateDTO();
+
         }catch (IOException e) {
             throw new RuntimeException(e);
 
         }
         }
+        return playerList;
     }
 
 }

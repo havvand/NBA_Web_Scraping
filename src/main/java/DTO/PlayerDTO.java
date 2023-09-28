@@ -1,4 +1,4 @@
-package DTO;
+package dto;
 
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -23,7 +23,6 @@ public class PlayerDTO {
         List<PlayerDTO> foundPlayers = new ArrayList<>();
         for (PlayerDTO s : data) {
             if(s.position.matches("[\\w]")) {
-                System.out.println(s);
                 foundPlayers.add(s);
             }
         }
