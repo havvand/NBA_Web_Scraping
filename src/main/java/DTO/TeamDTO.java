@@ -16,6 +16,8 @@ public class TeamDTO {
     private String city;
     private String abbreviation;
     private String division;
+
+    private String conference;
     private String full_name;
     private String name;
 

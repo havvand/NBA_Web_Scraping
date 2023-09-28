@@ -12,7 +12,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         TeamDAO teamDAO = TeamDAOImpl.getInstance();
-//        PlayerDAO playerDAO = PlayerDAOImpl.getInstance();
+        PlayerDAO playerDAO = PlayerDAOImpl.getInstance();
         DivisionDAO divisionDAO = DivisionDAOImpl.getInstance();
         ArenaDAO arenaDAO = ArenaDAOImpl.getInstance();
         LocationDAO locationDAO = LocationDAOImpl.getInstance();
@@ -49,5 +49,7 @@ public class Main {
 
 
     }
+
+
 
 }
