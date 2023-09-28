@@ -16,7 +16,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 //        TeamDAO teamDAO = TeamDAOImpl.getInstance();
-//        PlayerDAO playerDAO = PlayerDAOImpl.getInstance();
+        PlayerDAO playerDAO = PlayerDAOImpl.getInstance();
 //        DivisionDAO divisionDAO = DivisionDAOImpl.getInstance();
 //        ArenaDAO arenaDAO = ArenaDAOImpl.getInstance();
 //        LocationDAO locationDAO = LocationDAOImpl.getInstance();
@@ -28,9 +28,13 @@ public class Main {
 //            NBA_Location location = new NBA_Location(s.getLocation());
 //            locationDAO.createLocation(location);
 //        });
-//        PlayerAPIReader apiReader = new PlayerAPIReader();
-//        List<PlayerDTO> list = apiReader.callToAPI();
-//        list.forEach(System.out::println);
+        PlayerAPIReader apiReader = new PlayerAPIReader();
+        List<PlayerDTO> list = apiReader.callToAPI();
+        list.forEach(l -> {
+          NBA_Player player = new NBA_Player(l.getFirst_name(), l.getLast_name(), l.getPosition());
+          playerDAO.createPlayer(player);
+      });
+
 //        TeamAPIReader teamAPIReader = new TeamAPIReader();
 //        List<TeamDTO> teamList = teamAPIReader.callToAPI();
 //        teamList.forEach(t -> {
@@ -46,14 +50,14 @@ public class Main {
 //                    }
 //                    divisionDAO.createDivision(division);
 //        });
-        ArenaEnricher ae = new ArenaEnricher();
-        ae.arenaEnricher();
-        LocationEnricher le = new LocationEnricher();
-        le.locationEnricher();
-        DivisionEnricher div = new DivisionEnricher();
-        div.divisionEnricher();
-        TeamEnricher te = new TeamEnricher();
-        te.teamEnricher();
+//        ArenaEnricher ae = new ArenaEnricher();
+//        ae.arenaEnricher();
+//        LocationEnricher le = new LocationEnricher();
+//        le.locationEnricher();
+//        DivisionEnricher div = new DivisionEnricher();
+//        div.divisionEnricher();
+//        TeamEnricher te = new TeamEnricher();
+//        te.teamEnricher();
     }
 
 

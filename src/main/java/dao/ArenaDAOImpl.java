@@ -29,15 +29,16 @@ public class ArenaDAOImpl implements ArenaDAO{
     }
 
     @Override
-    public int readArena(NBA_Arena arena){
+    public NBA_Arena readArena(int id){
+        NBA_Arena arena;
         try(EntityManager em = emf.createEntityManager()){
             em.getTransaction().begin();
-            em.find(NBA_Arena.class, arena.getId());
+            arena = em.find(NBA_Arena.class, id);
             em.getTransaction().commit();
 
 
         }
-        return arena.getId();
+        return arena;
     }
 
     @Override

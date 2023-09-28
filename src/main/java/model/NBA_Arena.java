@@ -20,12 +20,19 @@ public class NBA_Arena {
     private int id;
     private String arenaName;
     private int capacity;
-    @ManyToOne
-    private NBA_Team team;
+    @OneToMany (mappedBy = "arena")
+    private Set<NBA_Team> teams = new HashSet<>();
 
     public NBA_Arena(String arenaName, int capacity) {
         this.arenaName = arenaName;
         this.capacity = capacity;
+    }
+
+    public void addTeam(NBA_Team team) {
+        this.teams.add(team);
+        if (team != null) {
+            team.setArena(this);
+        }
     }
 
 }
