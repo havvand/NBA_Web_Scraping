@@ -3,7 +3,12 @@ package dao;
 import config.HibernateConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import model.NBA_Team;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TeamDAOImpl implements TeamDAO {
     private static TeamDAOImpl instance;
@@ -62,6 +67,17 @@ public class TeamDAOImpl implements TeamDAO {
             em.getTransaction().commit();
 
         }
+    }
+
+    public List<NBA_Team> getAllTeams() {
+        List<NBA_Team> teams = new ArrayList<>();
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            TypedQuery<NBA_Team> query = em.createQuery("SELECT t FROM NBA_Team t", NBA_Team.class);
+            teams = query.getResultList();
+            em.getTransaction().commit();
+        }
+        return teams;
     }
 
 

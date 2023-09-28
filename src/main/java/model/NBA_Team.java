@@ -29,7 +29,8 @@ public class NBA_Team {
     @OneToMany(mappedBy = "team")
     private Set<NBA_Player> players = new HashSet<>();
 
-    public NBA_Team(String name, String abbreviation) {
+    public NBA_Team(int id, String name, String abbreviation) {
+        this.id = id;
         this.name = name;
         this.abbreviation = abbreviation;
     }

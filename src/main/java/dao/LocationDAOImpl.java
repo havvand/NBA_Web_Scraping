@@ -28,14 +28,15 @@ public class LocationDAOImpl implements LocationDAO{
 
     @Override
 
-    public int readLocation(NBA_Location location) {
+    public NBA_Location readLocation(int id) {
+        NBA_Location foundlocation;
         try(EntityManager em = emf.createEntityManager()){
             em.getTransaction().begin();
-            em.find(NBA_Location.class , location.getId());
+            foundlocation = em.find(NBA_Location.class , id);
             em.getTransaction().commit();
 
         }
-        return location.getId();
+        return foundlocation;
     }
 
     @Override

@@ -27,14 +27,15 @@ public class PlayerDAOImpl implements PlayerDAO{
     }
 
     @Override
-    public int readPlayer(NBA_Player player){
+    public NBA_Player readPlayer(int id){
+        NBA_Player foundPlayer;
         try (EntityManager em = emf.createEntityManager()){
             em.getTransaction().begin();
-            em.find(NBA_Player.class,player.getId());
+            foundPlayer = em.find(NBA_Player.class,id);
             em.getTransaction().commit();
 
         }
-        return player.getId();
+        return foundPlayer;
     }
 
     @Override

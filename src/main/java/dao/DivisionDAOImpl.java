@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import model.NBA_Division;
 
+import java.util.List;
+
 public class DivisionDAOImpl implements DivisionDAO{
     private static DivisionDAOImpl instance;
 
@@ -65,6 +67,16 @@ public class DivisionDAOImpl implements DivisionDAO{
                 em.getTransaction().commit();
             }
         }
+    }
+
+    public List<NBA_Division> getAllDivisions() {
+        List<NBA_Division> divisions;
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            divisions = em.createQuery("SELECT d FROM NBA_Division d", NBA_Division.class).getResultList();
+            em.getTransaction().commit();
+        }
+        return divisions;
     }
 
 
