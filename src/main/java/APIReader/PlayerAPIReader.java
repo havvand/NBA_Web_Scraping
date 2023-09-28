@@ -33,7 +33,7 @@ public class PlayerAPIReader {
             Response response = client.newCall(request).execute();
             String res = response.body().string();
             PlayerDTO playerDTO = gson.fromJson(res, PlayerDTO.class);
-            playerList = playerDTO.generateDTO();
+            playerList.addAll(playerDTO.generateDTO());
 
         }catch (IOException e) {
             throw new RuntimeException(e);
