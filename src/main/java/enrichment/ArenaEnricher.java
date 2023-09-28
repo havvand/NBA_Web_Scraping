@@ -8,7 +8,7 @@ import webscraper.WebScraper;
 
 import java.util.List;
 
-public class Enricher {
+public class ArenaEnricher {
     private WebScraper webScraper = new WebScraper();
 
     public List<ScraperDTO> arenaEnricher() {
@@ -21,8 +21,6 @@ public class Enricher {
         return  arenaList;
     }
 
-    public List<ScraperDTO> locationEnricher() {
-        return null;
-    }
+
   List<ScraperDTO> scraperList = webScraper.teamScraper();
 }

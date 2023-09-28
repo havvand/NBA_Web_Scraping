@@ -1,0 +1,31 @@
+package enrichment;
+
+import APIReader.TeamAPIReader;
+import dao.DivisionDAO;
+import dao.DivisionDAOImpl;
+import dto.TeamDTO;
+import model.NBA_Conference;
+import model.NBA_Division;
+import webscraper.WebScraper;
+
+import java.util.List;
+
+public class DivisionEnricher {
+    private WebScraper webScraper = new WebScraper();
+
+    public List<TeamDTO> divisionEnricher() {
+        TeamAPIReader teamAPIReader = new TeamAPIReader();
+        List<TeamDTO> divisionList = teamAPIReader.callToAPI();
+        divisionList.forEach(t -> {
+            DivisionDAO divisionDAO = DivisionDAOImpl.getInstance();
+            NBA_Division division = new NBA_Division(t.getDivision());
+            if(t.getConference().matches("East")) {
+                division.setConference(NBA_Conference.EASTERN);
+            } else {
+                division.setConference(NBA_Conference.WESTERN);
+            }
+            divisionDAO.createDivision(division);
+        });
+        return divisionList;
+    }
+}
