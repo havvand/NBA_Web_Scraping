@@ -21,14 +21,13 @@ public class NBA_Team {
     private String abbreviation;
     @ManyToOne
     private NBA_Division division;
-    @OneToMany (mappedBy = "team")
-    private Set<NBA_Arena> arenas = new HashSet<>();
+    @ManyToOne
+    private NBA_Arena arena;
     @ManyToOne
     private NBA_Location location;
 
     @OneToMany(mappedBy = "team")
     private Set<NBA_Player> players = new HashSet<>();
-
 
     public NBA_Team(String name, String abbreviation) {
         this.name = name;
@@ -41,13 +40,5 @@ public class NBA_Team {
             player.setTeam(this);
         }
     }
-
-    public void addArena(NBA_Arena arena) {
-        this.arenas.add(arena);
-        if (arena != null) {
-            arena.setTeam(this);
-        }
-    }
-
 
 }

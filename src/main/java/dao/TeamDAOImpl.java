@@ -29,14 +29,15 @@ public class TeamDAOImpl implements TeamDAO {
         return team.getId();
     }
 
-    public int readTeam(NBA_Team team) {
+    public NBA_Team readTeam(int id) {
+        NBA_Team team;
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            em.find(NBA_Team.class, team.getId());
+            team = em.find(NBA_Team.class, id);
             em.getTransaction().commit();
 
         }
-        return team.getId();
+        return team;
 
 
     }
