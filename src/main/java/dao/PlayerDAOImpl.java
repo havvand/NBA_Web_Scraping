@@ -50,4 +50,13 @@ public class PlayerDAOImpl implements PlayerDAO{
     }
 
 
+    public NBA_Player updatePlayer(NBA_Player player) {
+        NBA_Player updatedPlayer;
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            updatedPlayer = em.merge(player);
+            em.getTransaction().commit();
+        }
+        return updatedPlayer;
+    }
 }

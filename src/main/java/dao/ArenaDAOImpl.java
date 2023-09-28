@@ -66,4 +66,6 @@ public class ArenaDAOImpl implements ArenaDAO{
     }
 
 
+    public void setEntityManager(EntityManager em) {
+    }
 }
