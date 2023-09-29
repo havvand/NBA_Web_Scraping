@@ -13,10 +13,10 @@ public class Main {
         div.divisionEnricher();
         LocationEnricher loc = new LocationEnricher();
         loc.locationEnricher();
-        TeamEnricher te = new TeamEnricher();
-        te.enrich();
         ArenaEnricher ae = new ArenaEnricher();
         ae.arenaEnricher();
+        TeamEnricher te = new TeamEnricher();
+        te.enrich();
         PlayerEnricher pe = new PlayerEnricher();
         pe.methodOne();
 

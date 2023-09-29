@@ -25,9 +25,9 @@ public class DivisionEnricher {
             DivisionDAO divisionDAO = DivisionDAOImpl.getInstance();
             NBA_Division division = new NBA_Division(t.getDivision());
             if(t.getConference().matches("East")) {
-                division.setConference(NBA_Conference.EASTERN);
+                division.setConference(NBA_Conference.EASTERN.toString());
             } else {
-                division.setConference(NBA_Conference.WESTERN);
+                division.setConference(NBA_Conference.WESTERN.toString());
             }
             divisionDAO.createDivision(division);
         });

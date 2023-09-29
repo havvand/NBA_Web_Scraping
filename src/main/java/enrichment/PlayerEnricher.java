@@ -47,11 +47,6 @@ public class PlayerEnricher {
 
     }
 
-    public void method() {
-        playerList.forEach(p -> {
-            System.out.println(p.getTeam());
-        });
-    }
     private int extractTeamId(String teamJson) {
         try {
             // Parse the JSON string using Gson

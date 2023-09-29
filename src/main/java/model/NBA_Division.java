@@ -17,7 +17,7 @@ public class NBA_Division {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String divisionName;
-    private NBA_Conference conference;
+    private String conference;
 
     @OneToMany (mappedBy = "division")
     private Set<NBA_Team> teams = new HashSet<>();

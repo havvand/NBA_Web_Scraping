@@ -23,7 +23,7 @@ public class NBA_Team {
     private NBA_Division division;
     @ManyToOne
     private NBA_Location location;
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     private NBA_Arena arena;
 
     @OneToMany(mappedBy = "team")
