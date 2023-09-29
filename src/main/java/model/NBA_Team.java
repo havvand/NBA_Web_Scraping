@@ -22,9 +22,9 @@ public class NBA_Team {
     @ManyToOne
     private NBA_Division division;
     @ManyToOne
-    private NBA_Arena arena;
-    @ManyToOne
     private NBA_Location location;
+    @ManyToOne
+    private NBA_Arena arena;
 
     @OneToMany(mappedBy = "team")
     private Set<NBA_Player> players = new HashSet<>();

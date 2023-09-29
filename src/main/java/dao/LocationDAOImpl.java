@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import model.NBA_Location;
 
+import java.util.List;
+
 public class LocationDAOImpl implements LocationDAO{
     private static LocationDAOImpl instance;
     private EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
@@ -59,6 +61,17 @@ public class LocationDAOImpl implements LocationDAO{
             em.remove(deletedLocation);
             em.getTransaction().commit();
         }
+    }
+
+    @Override
+    public List<NBA_Location> getAllLocations() {
+        List<NBA_Location> locations;
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            locations = em.createQuery("SELECT l FROM NBA_Location l", NBA_Location.class).getResultList();
+            em.getTransaction().commit();
+        }
+        return locations;
     }
 
 }

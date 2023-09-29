@@ -22,45 +22,38 @@ public class TeamEnricher {
     private TeamDAO teamDAO = TeamDAOImpl.getInstance();
 
     public List<TeamDTO> enrich() {
+        List<NBA_Division> divisions = divisionDAO.getAllDivisions();
+        List<NBA_Location> locations = locationDAO.getAllLocations();
+        List<NBA_Arena> arenas = arenaDAO.getAllArenas();
         teamList.forEach(t -> {
             int id = Integer.parseInt(t.getId());
             NBA_Team team = new NBA_Team(id, t.getFull_name(), t.getAbbreviation());
-            scrapeList.forEach(scraperDTO -> {
-                if (team.getName().contains(scraperDTO.getTeamName())) {
-                    NBA_Arena arena = new NBA_Arena(scraperDTO.getArena(), scraperDTO.getCapacity());
-                    team.setArena(arena);
-                    arenaDAO.createArena(arena);
-                    NBA_Location location = new NBA_Location(scraperDTO.getLocation());
-                    team.setLocation(location);
-                    locationDAO.createLocation(location);
+            divisions.forEach(d -> {
+                if(d.getDivisionName().equals(t.getDivision())) {
+                    team.setDivision(d);
                 }
+            });
+            locations.forEach(l -> {
+                if(l.getLocation().contains(t.getCity())) {
+                    team.setLocation(l);
+                }
+                else if(team.getName().equals("LA Clippers")) {
+                    NBA_Location loc = locationDAO.readLocation(21);
+                    team.setLocation(loc);
 
+                }
+                else if(team.getName().equals("Golden State Warriors"))  {
+                    NBA_Location loc = locationDAO.readLocation(20);
+                    team.setLocation(loc);
+                }
+                else if(team.getName().equals("Brooklyn Nets")) {
+                    NBA_Location loc = locationDAO.readLocation(2);
+                    team.setLocation(loc);
+                }
             });
             teamDAO.createTeam(team);
         });
         return teamList;
-    }
-
-    public List<ScraperDTO> enrich2() {
-        scrapeList.forEach(t -> {
-
-            NBA_Team team = new NBA_Team(00, t.getTeamName(), "");
-            NBA_Arena arena = new NBA_Arena(t.getArena(), t.getCapacity());
-            NBA_Location location = new NBA_Location(t.getLocation());
-
-
-        });
-        return scrapeList;
-    }
-
-    public void enrichAbbreviationAndId() {
-        TeamDAO teamDAO = TeamDAOImpl.getInstance();
-        DivisionDAO divisionDAO = DivisionDAOImpl.getInstance();
-        List<NBA_Division> list = divisionDAO.getAllDivisions();
-        List<NBA_Team> nbaTeams = teamDAO.getAllTeams();
-
-
-
     }
 
 

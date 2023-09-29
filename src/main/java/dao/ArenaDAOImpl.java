@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import model.NBA_Arena;
 
+import java.util.List;
+
 public class ArenaDAOImpl implements ArenaDAO{
     private static ArenaDAOImpl instance;
     private EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
@@ -64,6 +66,17 @@ public class ArenaDAOImpl implements ArenaDAO{
             }
         em.getTransaction().commit();}
 
+    }
+
+    @Override
+    public List<NBA_Arena> getAllArenas() {
+        List<NBA_Arena> arenas;
+        try(EntityManager em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            arenas = em.createQuery("SELECT a FROM NBA_Arena a", NBA_Arena.class).getResultList();
+            em.getTransaction().commit();
+        }
+        return arenas;
     }
 
 

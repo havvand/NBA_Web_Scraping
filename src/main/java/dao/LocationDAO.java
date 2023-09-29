@@ -2,6 +2,8 @@ package dao;
 
 import model.NBA_Location;
 
+import java.util.List;
+
 public interface LocationDAO {
     int createLocation(NBA_Location location);
 
@@ -10,4 +12,6 @@ public interface LocationDAO {
     NBA_Location updateLocation(NBA_Location location);
 
     void deleteLocation(int id);
+
+    List<NBA_Location> getAllLocations();
 }

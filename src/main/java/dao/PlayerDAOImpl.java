@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import model.NBA_Player;
 
+import java.util.List;
+
 public class PlayerDAOImpl implements PlayerDAO{
     private static PlayerDAOImpl instance;
     private EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig();
@@ -48,6 +50,17 @@ public class PlayerDAOImpl implements PlayerDAO{
             em.getTransaction().commit();
 
         }
+    }
+
+    @Override
+    public List<NBA_Player> getAllPlayers() {
+        List<NBA_Player> players;
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+            players = em.createQuery("SELECT p FROM NBA_Player p", NBA_Player.class).getResultList();
+            em.getTransaction().commit();
+        }
+        return players;
     }
 
 
